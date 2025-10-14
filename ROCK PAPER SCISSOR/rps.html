@@ -3,96 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rock paper scissior</title>
+    <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <p>ROCK PAPER SCISSOR</p>
+    <p>ROCK PAPER SCISSORS</p>
 
-    <button
-      onclick="const randomNumber = Math.random(); 
+    <button onclick="playRound('rock')">ROCK</button>
+    <button onclick="playRound('paper')">PAPER</button>
+    <button onclick="playRound('scissor')">SCISSOR</button>
+   
+   <button onclick="
+    score.wins= 0;
+    score.losses= 0;
+    score.ties= 0;    //button reset
 
-rulesofgame()
-    console.log(computerMove);
-
-    let result = '';
-
-    if(computerMove === 'rock') {
-        result='TIE.';
-    } else if (computerMove === 'paper') {
-        result = 'you lose'
-    } else if (computerMove === 'scissior') {
-        result = 'you win'
-    }
-
-    alert(`you picked rock. computer picked ${computerMove}. ${result}`);
-    "
-    >
-      ROCK
-    </button>
-
-    <!-- here we are generating or creating computer to make his move generate a random numbber with the help of randomnumber operator and we hhave 3moves so we will divide it by 3 i.e 1/3 and assign the random generated value under 1/3 to rock and from 1/3 to 2/3 to paper and else for scissior. -->
-
-    <button
-      onclick="const randomNumber = Math.random();
-
-      rulesofgame()
-
-
-
-    console.log(computerMove);
-    let result = '';
-    
-    if(computerMove === 'rock') {
-        result='you lose';
-    }
-    else if(computerMove === 'paper') {
-        result = 'tie.';
-    }
-    else if (computerMove === 'scissor') {
-        result = 'you win';
-    }
-
-    alert(`you picked paper. computer picked ${computerMove}. ${result}`);
-    "
-    >
-      PAPER
-    </button>
-
-    <button
-      onclick="const randomNumber = Math.random()
-
-      rulesofgame()
-    
-      console.log(computerMove);
-    let result = '';
-    
-    if(computerMove === 'rock') {
-        result='you lose';
-    }
-    else if(computerMove === 'paper') {
-        result = 'you win.';
-    }
-    else if (computerMove === 'scissor') {
-        result = 'tie';
-    }
-
-    alert(`you picked scissor. computer picked ${computerMove}. ${result}`);
-    "
-    >
-      SCISSOR>
-    </button>
+    ">Reset</button>
 
     <script>
-      let computerMove = "";
+      let score = {
+        wins: 0,
+        losses: 0,
+        ties: 0,
+      };
 
-      function rulesofgame() {
-        if (randomNumber >= 0 && randomNumber < 1 / 3) {
-          computerMove = "rock";
-        } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-          computerMove = "paper";
-        } else if (randomNumber >= 2 / 3 && randomNumber < 3 / 3) {
-          computerMove = "scissior";
+      function getComputerMove() {
+        const randomNumber = Math.random();
+
+        if (randomNumber < 1 / 3) {
+          return "rock";
+        } else if (randomNumber < 2 / 3) {
+          return "paper";
+        } else {
+          return "scissor";
         }
+      }
+
+      function playRound(playerMove) {
+        const computerMove = getComputerMove();
+        let result = "";
+
+        if (playerMove === computerMove) {
+          result = "tie";
+          score.ties++;
+        } else if (
+          (playerMove === "rock" && computerMove === "scissor") ||
+          (playerMove === "paper" && computerMove === "rock") ||
+          (playerMove === "scissor" && computerMove === "paper")
+        ) {
+          result = "you win";
+          score.wins++;
+        } else {
+          result = "you lose";
+          score.losses++;
+        }
+
+        alert(
+          `You picked ${playerMove}. Computer picked ${computerMove}. ${result}.\nWins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`
+        );
       }
     </script>
   </body>
