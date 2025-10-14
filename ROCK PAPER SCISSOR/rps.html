@@ -9,7 +9,7 @@
     <p>ROCK PAPER SCISSORS</p>
 
     <button onclick="playRound('rock')">ROCK</button>
-    <button onclick="playRound('paper')">PAPER</button>
+    <button onclick="playRound('paper')">PAPER</button> <!--all three button-->  
     <button onclick="playRound('scissor')">SCISSOR</button>
    
    <button onclick="
@@ -17,14 +17,14 @@
     score.losses= 0;
     score.ties= 0;    //button reset
 
+
+
     ">Reset</button>
 
     <script>
-      let score = {
-        wins: 0,
-        losses: 0,
-        ties: 0,
-      };
+      const score = JSON.parse(localStorage.getItem('score'))
+//jjson parse convert string into 
+      console.log();
 
       function getComputerMove() {
         const randomNumber = Math.random();
@@ -57,6 +57,9 @@
           score.losses++;
         }
 
+        localStorage.setItem('score', JSON.stringify(score));  
+ //stringify jjson will convert the convert value into string.
+ //localStorage wont let the previous score delete or reset its value when we reset the page.  
         alert(
           `You picked ${playerMove}. Computer picked ${computerMove}. ${result}.\nWins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`
         );
