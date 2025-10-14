@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM project</title>
+</head>
+<body>
+    <p>Youtube subscribe button</p>
+    <button onclick="subscribe()" class="js_sub">Subscribe</button>
+    
+    
+    <script>
+        function subscribe () {
+            const btn_ele = document.querySelector('.js_sub');
+    if(btn_ele.innerHTML === 'Subscribe') {
+        btn_ele.innerHTML = 'Subscribed';
+    } //inner html can also be used in case of any gap.
+    else{
+        btn_ele.innerHTML = 'Subscribe';
+    }
+        }
+    </script>
+</body>
+</html>

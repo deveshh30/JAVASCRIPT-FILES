@@ -15,15 +15,24 @@
    <button onclick="
     score.wins= 0;
     score.losses= 0;
-    score.ties= 0;    //button reset
+    score.ties= 0;  
+    localStorage.removeItem('score');  //button reset
 
 
 
     ">Reset</button>
 
     <script>
-      const score = JSON.parse(localStorage.getItem('score'))
-//jjson parse convert string into 
+      let score = JSON.parse(localStorage.getItem('score'))
+//json parse convert string into object.
+
+if(score === null) {
+  score ={
+    wins : 0;        //default score
+    losses : 0;
+    ties : 0;
+  };
+}
       console.log();
 
       function getComputerMove() {
