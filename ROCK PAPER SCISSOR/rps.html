@@ -1,104 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="rps.css">
+
   </head>
   <body>
-    <p>ROCK PAPER SCISSORS</p>
+    <p class="title">Rock Paper Scissors</p>
+    <button class="move-button js-rock-button">
+      <img src="images/rock-emoji.png" class="move-icon">
+    </button>
 
-    <!-- all three button -->
-    <button onclick="playRound('rock')">ROCK</button>
-    <button onclick="playRound('paper')">PAPER</button>
-    <button onclick="playRound('scissor')">SCISSOR</button>
+    <button class="move-button js-paper-button">
+      <img src="images/paper-emoji.png" class="move-icon">
+    </button>
 
-    <p class="game-score"></p>
-    <p class="game-moves"></p>
-    <p class="game-result"></p>
+    <button class="move-button js-scissors-button">
+      <img src="images/scissors-emoji.png" class="move-icon">
+    </button>
 
-    <button onclick="resetScore()">Reset</button>
+    <p class="js-result result"></p>
+    <p class="js-moves"></p>
+    <p class="js-score score"></p>
 
-    <script>
-      // get the saved score from localStorage
-      let score = JSON.parse(localStorage.getItem("score"));
+    <button onclick="
+      score.wins = 0;
+      score.losses = 0;
+      score.ties = 0;
+      localStorage.removeItem('score');
+      updateScoreElement();
+    " class="reset-score-button js-reset-score-button">Reset Score</button>
 
-      // json parse converts string into object.
-      if (score === null) {
-        score = {
-          wins: 0, // default score
-          losses: 0,
-          ties: 0,
-        };
-      }
+    <button class="auto-play-button" onclick="
+      autoPlay();
+    ">Auto Play</button>
+    
+    <script src="scripts/12-rock-paper-scissors.js"></script>
 
-      // function to show the score on the page
-      function updateScoreDisplay() {
-        document.querySelector(
-          ".game-score"
-        ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
-      }
-
-      // function to randomly get computer's move
-      function getComputerMove() {
-        const randomNumber = Math.random();
-
-        if (randomNumber < 1 / 3) {
-          return "rock";
-        } else if (randomNumber < 2 / 3) {
-          return "paper";
-        } else {
-          return "scissor";
-        }
-      }
-
-      // function to play one round of the game
-      function playRound(playerMove) {
-        const computerMove = getComputerMove();
-        let result = "";
-
-        if (playerMove === computerMove) {
-          result = "tie";
-          score.ties++;
-        } else if (
-          (playerMove === "rock" && computerMove === "scissor") ||
-          (playerMove === "paper" && computerMove === "rock") ||
-          (playerMove === "scissor" && computerMove === "paper")
-        ) {
-          result = "you win";
-          score.wins++;
-        } else {
-          result = "you lose";
-          score.losses++;
-        }
-
-        // save the score in localStorage
-        localStorage.setItem("score", JSON.stringify(score));
-        // stringify will convert the object value into string.
-        // localStorage won’t let the previous score delete or reset its value when we reload the page.
-
-        // show the updated score and result on the page
-        updateScoreDisplay();
-        document.querySelector(
-          ".game-result"
-        ).innerHTML = `You picked ${playerMove}. Computer picked ${computerMove}. ${result.toUpperCase()}`;
-      }
-
-      // button reset function
-      function resetScore() {
-        score = { wins: 0, losses: 0, ties: 0 };
-        localStorage.removeItem("score"); // button reset
-        updateScoreDisplay();
-        document.querySelector(".game-result").innerHTML = "";
-      }
-
-      document.querySelector('.game-result').innerHTML = result;
-
-      document.querySelector('.game-moves').innerHTML = `You${playerMove} - ${computerMove} Computer`;
-
-      
-      // show score when the page first loads
-      updateScoreDisplay();
-    </script>
+        <script src="rps.js"></script>
   </body>
 </html>
