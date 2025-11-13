@@ -1,12 +1,16 @@
 const buttons = document.querySelectorAll('.button');
 const body = document.querySelector('body');
 
+const defaultColor = 'aqua';
+
 buttons.forEach((button) => {
-  button.addEventListener('mouseenter', function(e) {
-    const color = e.target.id;
-    body.style.backgroundColor = color;
+  // On hover
+  button.addEventListener('mouseenter', (e) => {
+    body.style.backgroundColor = e.target.id;
   });
 
-
+  // On mouse leave
+  button.addEventListener('mouseleave', () => {
+    body.style.backgroundColor = defaultColor;
+  });
 });
-
