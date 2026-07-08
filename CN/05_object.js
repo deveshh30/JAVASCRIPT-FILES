@@ -24,3 +24,15 @@ User.lastName = function() {
 }
 
 console.log(User.lastName);
+
+
+const course = {
+    name : "mern stack",
+    price : "455",
+    tutor : "hitesh chaudhary"
+
+}
+
+const {tutor} = course;
+
+console.log(tutor); // de-structuring
